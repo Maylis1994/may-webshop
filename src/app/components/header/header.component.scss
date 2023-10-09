@@ -1,0 +1,22 @@
+@import "../../../styles.scss";
+
+.header {
+  background-color: white;
+  display: flex;
+  max-width: 20rem;
+
+  &__image-box {
+    margin: 1rem 20rem 1rem 20rem;
+    @include for-phone-only {
+      margin: 1rem;
+    }
+  }
+
+  &__image {
+    max-width: 20rem;
+    @include for-phone-only {
+      max-width: 10rem;
+      margin: 1rem;
+    }
+  }
+}

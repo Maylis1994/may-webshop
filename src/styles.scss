@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@mixin for-phone-only {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-up {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

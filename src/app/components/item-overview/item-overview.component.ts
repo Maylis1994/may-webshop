@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import houselist from '../../../assets/may-webshop-data.json';
+import { Component } from '@angular/core';
+import houselist from '../../../assets/house-data.json';
 
-interface Employees {
+export interface House {
   id: string;
   name: string;
+  image: string;
+  price: number;
+  description: string;
+  amountOfBedrooms: number;
 }
 
 @Component({
@@ -11,11 +15,6 @@ interface Employees {
   templateUrl: './item-overview.component.html',
   styleUrls: ['./item-overview.component.scss'],
 })
-export class ItemOverviewComponent implements OnInit {
-  public houseList: Employees[] = houselist;
-
-  ngOnInit(): void {
-    this.houseList = houselist;
-    console.log('houseList', this.houseList);
-  }
+export class ItemOverviewComponent {
+  public houseList: House[] = houselist;
 }

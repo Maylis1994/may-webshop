@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { House } from '../item-overview/item-overview.component';
 
 @Component({
   selector: 'app-item',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent {
-  @Input() houseItem: any;
+  @Input() houseItem: House;
 }

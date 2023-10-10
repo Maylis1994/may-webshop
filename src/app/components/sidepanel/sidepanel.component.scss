@@ -1,0 +1,55 @@
+.sidepanel {
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgb(216, 171, 86);
+  overflow-x: hidden;
+  transition: 0.3s;
+
+  &.open {
+    width: 35%;
+  }
+
+  &__content {
+    padding: 4rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.close-button {
+  margin-top: 1rem;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  border: none;
+  cursor: pointer;
+  font-size: 2em;
+  border-radius: 4px;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.close-button::before,
+.close-button::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background-color: #333;
+  top: 5px;
+  left: 14px;
+  transform: rotate(45deg);
+}
+
+.close-button::after {
+  transform: rotate(-45deg);
+}

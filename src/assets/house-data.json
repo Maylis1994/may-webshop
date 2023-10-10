@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "name": "Villa Teun",
+    "image": "../../../assets/images/huis-1.jpg",
+    "amountOfBedrooms": 2,
+    "price": 40000,
+    "description": "Vierpersoons bungalow met uitzicht over de weilanden"
+  },
+  {
+    "id": "2",
+    "name": "Bonte Schaap",
+    "image": "../../../assets/images/huis-2.jpg",
+    "amountOfBedrooms": 2,
+    "price": 40000,
+    "description": "Vierpersoons bungalow met uitzicht op de bossen"
+  },
+  {
+    "id": "3",
+    "name": "Texelaar",
+    "image": "../../../assets/images/huis-3.jpg",
+    "amountOfBedrooms": 2,
+    "price": 30000,
+    "description": "Vierpersoons bungalow inclusief terras"
+  },
+  {
+    "id": "3",
+    "name": "Zwartbles",
+    "image": "../../../assets/images/huis-4.jpg",
+    "amountOfBedrooms": 1,
+    "price": 25000,
+    "description": "Tweepersoons bungalow met vrij uitzicht"
+  }
+]

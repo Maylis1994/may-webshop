@@ -1,0 +1,37 @@
+@import "../../../styles.scss";
+
+.header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 20rem 1rem 20rem;
+  @include for-phone-only {
+    margin: 1rem;
+  }
+
+  &__image {
+    max-width: 20rem;
+    @include for-phone-only {
+      max-width: 10rem;
+      margin: 1rem;
+    }
+  }
+
+  &__button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+  }
+}

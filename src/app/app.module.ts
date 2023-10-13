@@ -7,9 +7,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { ItemOverviewComponent } from './components/item-overview/item-overview.component';
 import { ItemComponent } from './components/item/item.component';
 import { SidepanelComponent } from './components/sidepanel/sidepanel.component';
+import { SidepanelItemComponent } from './components/sidepanel-item/sidepanel-item.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ItemOverviewComponent, ItemComponent, SidepanelComponent],
+  declarations: [AppComponent, HeaderComponent, ItemOverviewComponent, ItemComponent, SidepanelComponent, SidepanelItemComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

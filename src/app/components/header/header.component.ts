@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   public showSidePanel = false;
+  public listOfItems: any[];
 
   public showPanel() {
     this.showSidePanel = true;

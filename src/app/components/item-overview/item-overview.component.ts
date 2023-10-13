@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
+import { House } from 'src/app/services/wishlist.service';
 import houselist from '../../../assets/house-data.json';
-
-export interface House {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  description: string;
-  amountOfBedrooms: number;
-}
 
 @Component({
   selector: 'app-item-overview',

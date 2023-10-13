@@ -7,7 +7,7 @@
       <h2>
         {{ houseItem.name }}
       </h2>
-      <button class="item__button">
+      <button class="item__button" (click)="addToList()">
         <svg
           class="item__icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +20,6 @@
         </svg>
       </button>
     </div>
-    <p>{{ houseItem.description }}</p>
-    <p>Slaapkamers: {{ houseItem.amountOfBedrooms }}</p>
     <p>Prijs: {{ houseItem.price | currency : "EUR" : true }}</p>
   </div>
 </div>

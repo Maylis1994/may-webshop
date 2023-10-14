@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { House } from 'src/app/services/wishlistService/wishlist.service';
-import houselist from '../../../assets/house-data.json';
+import { ShoppingCartItem } from 'src/app/services/wishlistService/wishlist.service';
+import itemList from '../../../assets/items-list-data.json';
 
 @Component({
   selector: 'app-item-overview',
@@ -8,5 +8,5 @@ import houselist from '../../../assets/house-data.json';
   styleUrls: ['./item-overview.component.scss'],
 })
 export class ItemOverviewComponent {
-  public houseList: House[] = houselist;
+  public itemList: ShoppingCartItem[] = itemList;
 }

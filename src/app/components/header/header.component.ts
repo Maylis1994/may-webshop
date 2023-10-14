@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  House,
+  ShoppingCartItem,
   WishlistService,
 } from 'src/app/services/wishlistService/wishlist.service';
 
@@ -11,7 +11,7 @@ import {
 })
 export class HeaderComponent implements OnInit {
   public showSidePanel = false;
-  public wishlistItems: House[];
+  public wishlistItems: ShoppingCartItem[];
 
   constructor(private wishlistService: WishlistService) {}
 

@@ -1,11 +1,14 @@
 <div class="sidepanel" [class.open]="showPanel">
   <div class="sidepanel__content">
     <div class="sidepanel__header">
-      <h2>Je favorieten</h2>
+      <h2>Je winkelmandje</h2>
       <button class="close-button" (click)="closePanel()"></button>
     </div>
-    <div *ngFor="let item of wishlistItems">
-      <app-sidepanel-item [item]="item"></app-sidepanel-item>
-    </div>
+    <ng-container *ngIf="wishlistItems.length > 0; else showText">
+      <div *ngFor="let item of wishlistItems">
+        <app-sidepanel-item [item]="item"></app-sidepanel-item>
+      </div>
+    </ng-container>
+    <ng-template #showText> Je winkelmandje is leeg. </ng-template>
   </div>
 </div>

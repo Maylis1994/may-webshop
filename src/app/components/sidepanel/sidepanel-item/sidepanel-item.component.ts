@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {
-  House,
+  ShoppingCartItem,
   WishlistService,
 } from 'src/app/services/wishlistService/wishlist.service';
 
@@ -10,7 +10,7 @@ import {
   styleUrls: ['./sidepanel-item.component.scss'],
 })
 export class SidepanelItemComponent {
-  @Input() item: House;
+  @Input() item: ShoppingCartItem;
   public showBox = false;
   public quantity = 1;
 
@@ -29,6 +29,10 @@ export class SidepanelItemComponent {
       return;
     }
     this.quantity -= 1;
+  }
+
+  public removeFromCart(item: ShoppingCartItem) {
+    this.wishlistService.removeFromWishlist(item);
   }
 
   public updateQuantity() {

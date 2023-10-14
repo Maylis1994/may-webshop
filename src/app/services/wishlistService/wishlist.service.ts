@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface House {
+export interface ShoppingCartItem {
   id: string;
   name: string;
   image: string;
@@ -13,21 +13,25 @@ export interface House {
   providedIn: 'root',
 })
 export class WishlistService {
-  private listOfItems: BehaviorSubject<House[]> = new BehaviorSubject<House[]>(
-    []
-  );
-  public listOfItems$: Observable<House[]> = this.listOfItems.asObservable();
+  private listOfItems: BehaviorSubject<ShoppingCartItem[]> =
+    new BehaviorSubject<ShoppingCartItem[]>([]);
+  public listOfItems$: Observable<ShoppingCartItem[]> =
+    this.listOfItems.asObservable();
 
   constructor() {
     this.getListFromLocalStorage();
   }
 
-  public addToWishlist(item: House): void {
+  public addToWishlist(item: ShoppingCartItem): void {
     const currentList = this.listOfItems.getValue();
     const wishListItem = currentList.find(
       (listItem) => listItem.id === item.id
     );
     if (wishListItem) {
+      if (wishListItem.quantity) {
+        wishListItem.quantity += 1;
+        this.changeQuantity(wishListItem);
+      }
       return;
     }
 
@@ -36,12 +40,12 @@ export class WishlistService {
     this.listOfItems.next(currentList);
   }
 
-  public existInList(item: House): boolean {
+  public existInList(item: ShoppingCartItem): boolean {
     const currentList = this.listOfItems.getValue();
     return currentList.some((listItem) => listItem.id === item.id);
   }
 
-  public removeFromWishlist(item: House) {
+  public removeFromWishlist(item: ShoppingCartItem) {
     const currentList = this.listOfItems.getValue();
     const updatedList = currentList.filter(
       (listItem) => listItem.id !== item.id
@@ -50,7 +54,7 @@ export class WishlistService {
     this.listOfItems.next(updatedList);
   }
 
-  public changeQuantity(item: House) {
+  public changeQuantity(item: ShoppingCartItem) {
     const currentList = this.listOfItems.getValue();
     const updatedList = currentList.map((listItem) => {
       if (listItem.id === item.id) {
@@ -67,7 +71,7 @@ export class WishlistService {
     this.listOfItems.next([]);
   }
 
-  private setListInLocalStorage(list: House[]) {
+  private setListInLocalStorage(list: ShoppingCartItem[]) {
     const listJson = JSON.stringify(list);
     localStorage.setItem('cartItems', listJson);
   }

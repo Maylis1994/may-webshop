@@ -1,17 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { House, WishlistService } from 'src/app/services/wishlist.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  House,
+  WishlistService,
+} from 'src/app/services/wishlistService/wishlist.service';
 
 @Component({
   selector: 'app-sidepanel',
   templateUrl: './sidepanel.component.html',
   styleUrls: ['./sidepanel.component.scss'],
 })
-export class SidepanelComponent {
+export class SidepanelComponent implements OnInit {
   @Input() public showPanel: boolean = false;
   @Output() showPanelChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
+  public wishlistItems: House[];
+
   constructor(private wishlistService: WishlistService) {}
+
+  ngOnInit() {
+    this.wishlistService.listOfItems$.subscribe((items) => {
+      this.wishlistItems = items;
+    });
+  }
 
   public removeFromCart(item: House) {
     this.wishlistService.removeFromWishlist(item);

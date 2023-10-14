@@ -5,11 +5,8 @@
       <button class="close-button" (click)="closePanel()"></button>
     </div>
     <div>
-      <!-- Content for the side panel goes here -->
-      <div>
-        <ul>
-          <!-- <li *ngFor="let item of listItem"></li> -->
-        </ul>
+      <div *ngFor="let item of wishlistItems">
+        <app-sidepanel-item [item]="item"></app-sidepanel-item>
       </div>
     </div>
   </div>

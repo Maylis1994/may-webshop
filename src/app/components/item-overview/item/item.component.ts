@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { House, WishlistService } from 'src/app/services/wishlist.service';
+import {
+  House,
+  WishlistService,
+} from 'src/app/services/wishlistService/wishlist.service';
 
 @Component({
   selector: 'app-item',
@@ -12,7 +15,10 @@ export class ItemComponent {
   constructor(private wishlistService: WishlistService) {}
 
   public addToList() {
-    console.log('CLICKED');
+    if (this.wishlistService.existInList(this.houseItem)) {
+      this.wishlistService.removeFromWishlist(this.houseItem);
+      return;
+    }
     this.wishlistService.addToWishlist(this.houseItem);
   }
 }

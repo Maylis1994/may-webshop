@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { House } from 'src/app/services/wishlist.service';
+import { House } from 'src/app/services/wishlistService/wishlist.service';
 import houselist from '../../../assets/house-data.json';
 
 @Component({

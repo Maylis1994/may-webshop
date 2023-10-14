@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
   constructor(private wishlistService: WishlistService) {}
 
   ngOnInit() {
-    this.wishlistService.listOfItems$.subscribe((items) => {
-      this.wishlistItems = items;
+    this.wishlistService.shoppingCart$.subscribe((shoppingCart) => {
+      this.wishlistItems = shoppingCart.listOfItems;
     });
   }
 

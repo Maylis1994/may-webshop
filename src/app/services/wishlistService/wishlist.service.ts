@@ -9,76 +9,133 @@ export interface ShoppingCartItem {
   quantity?: number;
 }
 
+export interface ShoppingCart {
+  totalQuantity?: number;
+  totalAmount?: number;
+  listOfItems: ShoppingCartItem[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class WishlistService {
-  private listOfItems: BehaviorSubject<ShoppingCartItem[]> =
-    new BehaviorSubject<ShoppingCartItem[]>([]);
-  public listOfItems$: Observable<ShoppingCartItem[]> =
-    this.listOfItems.asObservable();
+  private shoppingCart: BehaviorSubject<ShoppingCart> =
+    new BehaviorSubject<ShoppingCart>({
+      totalQuantity: 0,
+      totalAmount: 0,
+      listOfItems: [],
+    });
+  public shoppingCart$: Observable<ShoppingCart> =
+    this.shoppingCart.asObservable();
 
   constructor() {
-    this.getListFromLocalStorage();
+    this.getCartFromLocalStorage();
   }
 
   public addToWishlist(item: ShoppingCartItem): void {
-    const currentList = this.listOfItems.getValue();
+    const currentList = this.shoppingCart.getValue().listOfItems;
     const wishListItem = currentList.find(
       (listItem) => listItem.id === item.id
     );
     if (wishListItem) {
+      console.log('TRUE!');
+      console.log('wishListItem.quantity', wishListItem.quantity);
       if (wishListItem.quantity) {
+        console.log('TRUE AGAIN!');
         wishListItem.quantity += 1;
         this.changeQuantity(wishListItem);
       }
       return;
     }
-
+    item.quantity = 1;
     currentList.push(item);
-    this.setListInLocalStorage(currentList);
-    this.listOfItems.next(currentList);
+    const totalPrice = this.updateTotalPrice();
+    this.shoppingCart.next({
+      ...this.shoppingCart.getValue(),
+      totalAmount: totalPrice,
+      listOfItems: currentList,
+    });
+    this.setCartInLocalStorage();
   }
 
   public existInList(item: ShoppingCartItem): boolean {
-    const currentList = this.listOfItems.getValue();
+    const currentList = this.shoppingCart.getValue().listOfItems;
     return currentList.some((listItem) => listItem.id === item.id);
   }
 
   public removeFromWishlist(item: ShoppingCartItem) {
-    const currentList = this.listOfItems.getValue();
+    const currentList = this.shoppingCart.getValue().listOfItems;
     const updatedList = currentList.filter(
       (listItem) => listItem.id !== item.id
     );
-    this.setListInLocalStorage(updatedList);
-    this.listOfItems.next(updatedList);
+    const totalPrice = this.updateTotalPrice();
+    this.shoppingCart.next({
+      ...this.shoppingCart.getValue(),
+      totalAmount: totalPrice,
+      listOfItems: updatedList,
+    });
+    this.setCartInLocalStorage();
+  }
+
+  public updateTotalPrice(): number {
+    const currentList = this.shoppingCart.getValue().listOfItems;
+    let totalPrice = 0;
+
+    for (const item of currentList) {
+      totalPrice += this.calculateItemCost(item);
+    }
+
+    return totalPrice;
+  }
+
+  private calculateItemCost(item: ShoppingCartItem): number {
+    return item.price * (item.quantity || 1);
   }
 
   public changeQuantity(item: ShoppingCartItem) {
-    const currentList = this.listOfItems.getValue();
+    const currentList = this.shoppingCart.getValue().listOfItems;
     const updatedList = currentList.map((listItem) => {
       if (listItem.id === item.id) {
         listItem.quantity = item.quantity;
       }
       return listItem;
     });
-    this.setListInLocalStorage(updatedList);
-    this.listOfItems.next(updatedList);
+    const totalPrice = this.updateTotalPrice();
+    this.shoppingCart.next({
+      ...this.shoppingCart.getValue(),
+      totalAmount: totalPrice,
+      listOfItems: updatedList,
+    });
+    this.setCartInLocalStorage();
   }
 
   public clearList() {
-    this.setListInLocalStorage([]);
-    this.listOfItems.next([]);
+    this.shoppingCart.next({
+      ...this.shoppingCart.getValue(),
+      totalAmount: 0,
+      totalQuantity: 0,
+      listOfItems: [],
+    });
+
+    this.setCartInLocalStorage();
   }
 
-  private setListInLocalStorage(list: ShoppingCartItem[]) {
-    const listJson = JSON.stringify(list);
-    localStorage.setItem('cartItems', listJson);
+  private setCartInLocalStorage() {
+    const shoppingCart = this.shoppingCart.getValue();
+    const cartJson = JSON.stringify(shoppingCart);
+    localStorage.setItem('cart', cartJson);
   }
 
-  private getListFromLocalStorage() {
-    const listJson = localStorage.getItem('cartItems');
-    const list = listJson ? JSON.parse(listJson) : [];
-    this.listOfItems.next(list);
+  private getCartFromLocalStorage() {
+    const cartJson = localStorage.getItem('cart');
+    const cart = cartJson
+      ? JSON.parse(cartJson)
+      : {
+          totalQuantity: 0,
+          totalAmount: 0,
+          listOfItems: [],
+        };
+
+    this.shoppingCart.next(cart);
   }
 }

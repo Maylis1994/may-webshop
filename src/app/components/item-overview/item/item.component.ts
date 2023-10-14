@@ -12,13 +12,11 @@ import {
 export class ItemComponent {
   @Input() houseItem: House;
 
+  public quantity: number = 1;
+
   constructor(private wishlistService: WishlistService) {}
 
   public addToList() {
-    if (this.wishlistService.existInList(this.houseItem)) {
-      this.wishlistService.removeFromWishlist(this.houseItem);
-      return;
-    }
     this.wishlistService.addToWishlist(this.houseItem);
   }
 }

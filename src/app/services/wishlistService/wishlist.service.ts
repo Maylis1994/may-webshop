@@ -50,11 +50,11 @@ export class WishlistService {
     this.listOfItems.next(updatedList);
   }
 
-  public changeQuantity(item: House, quantity: number) {
+  public changeQuantity(item: House) {
     const currentList = this.listOfItems.getValue();
     const updatedList = currentList.map((listItem) => {
       if (listItem.id === item.id) {
-        listItem.quantity = quantity;
+        listItem.quantity = item.quantity;
       }
       return listItem;
     });

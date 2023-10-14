@@ -13,7 +13,6 @@ export class SidepanelComponent implements OnInit {
   @Input() public showPanel: boolean = false;
   @Output() showPanelChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
-
   public wishlistItems: House[];
 
   constructor(private wishlistService: WishlistService) {}
@@ -26,11 +25,6 @@ export class SidepanelComponent implements OnInit {
 
   public removeFromCart(item: House) {
     this.wishlistService.removeFromWishlist(item);
-  }
-
-  public changeQuantity(item: House, quantity: string) {
-    const quantityNumber = parseInt(quantity);
-    this.wishlistService.changeQuantity(item, quantityNumber);
   }
 
   public closePanel() {

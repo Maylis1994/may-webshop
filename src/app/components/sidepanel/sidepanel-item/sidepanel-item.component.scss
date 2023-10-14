@@ -1,36 +1,8 @@
 .item {
-  border: solid;
-  border-color: black;
   background-color: white;
   display: flex;
   margin-bottom: 1rem;
-
-  &__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  &__image-box {
-    width: 50%;
-    height: 16rem;
-  }
-
-  &__content-box {
-    margin: 1.5rem;
-    width: 50%;
-  }
-
-  &__icon {
-    height: 1rem;
-    width: 1rem;
-    margin-right: 0.5rem;
-  }
-
-  &__title {
-    display: flex;
-    justify-content: space-between;
-  }
+  height: 8rem;
 
   &__button {
     background: none;
@@ -42,5 +14,37 @@
     outline: inherit;
     display: flex;
     align-items: center;
+    margin-left: 1rem;
+    text-decoration: underline;
+  }
+
+  &__quantity {
+    display: flex;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__image-box {
+    width: 30%;
+    height: 8rem;
+  }
+
+  &__content-box {
+    margin: 0.5rem 0.5rem 0.5rem 1rem;
+  }
+
+  &__icon {
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
   }
 }

@@ -9,7 +9,7 @@
         <app-sidepanel-item [item]="item"></app-sidepanel-item>
       </div>
       <p class="sidepanel__total">
-        Totaal: {{ shoppingCart.totalAmount | currency }}
+        Totaal: {{ shoppingCart.totalAmount | currency : "EUR" : true }}
       </p>
     </ng-container>
     <ng-template #showText> Je winkelmandje is leeg. </ng-template>

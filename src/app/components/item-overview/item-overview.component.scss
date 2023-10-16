@@ -3,7 +3,7 @@
   background-color: rgb(182, 206, 182);
 
   &__layout {
-    @include for-phone-only {
+    @include media-screen-m-down {
       display: flex;
       flex-direction: column;
       margin-left: 1rem;
@@ -16,9 +16,11 @@
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr 1fr;
-    @include for-phone-only {
+    @include media-screen-m-down {
       display: flex;
       flex-direction: column;
+      padding: 1rem;
+      padding-top: 2rem;
     }
   }
 }

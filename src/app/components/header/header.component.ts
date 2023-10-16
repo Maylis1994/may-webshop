@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ShoppingCartItem,
+  ShoppingCart,
   WishlistService,
 } from 'src/app/services/wishlistService/wishlist.service';
 
@@ -11,13 +11,13 @@ import {
 })
 export class HeaderComponent implements OnInit {
   public showSidePanel = false;
-  public wishlistItems: ShoppingCartItem[];
+  public shoppingCart: ShoppingCart;
 
   constructor(private wishlistService: WishlistService) {}
 
   ngOnInit() {
     this.wishlistService.shoppingCart$.subscribe((shoppingCart) => {
-      this.wishlistItems = shoppingCart.listOfItems;
+      this.shoppingCart = shoppingCart;
     });
   }
 

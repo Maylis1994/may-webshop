@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  ShoppingCartItem,
+  ShoppingCart,
   WishlistService,
 } from 'src/app/services/wishlistService/wishlist.service';
 
@@ -13,13 +13,13 @@ export class SidepanelComponent implements OnInit {
   @Input() public showPanel: boolean = false;
   @Output() showPanelChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
-  public wishlistItems: ShoppingCartItem[];
+  public shoppingCart: ShoppingCart;
 
   constructor(private wishlistService: WishlistService) {}
 
   ngOnInit() {
     this.wishlistService.shoppingCart$.subscribe((shoppingCart) => {
-      this.wishlistItems = shoppingCart.listOfItems;
+      this.shoppingCart = shoppingCart;
     });
   }
 

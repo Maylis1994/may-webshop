@@ -49,3 +49,29 @@
     justify-content: space-between;
   }
 }
+
+.plusminus {
+  display: flex;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    background-color: white;
+    cursor: pointer;
+    min-width: 2rem;
+    height: 2rem;
+
+    &--click {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  &__input {
+    width: 3rem;
+  }
+}

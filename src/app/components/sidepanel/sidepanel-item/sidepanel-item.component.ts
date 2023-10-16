@@ -12,7 +12,9 @@ import {
 export class SidepanelItemComponent {
   @Input() item: ShoppingCartItem;
   public showBox = false;
-  public quantity = 1;
+  public isPlusClicked = false;
+  public isMinusClicked = false;
+  public isUpdateClicked = false;
 
   constructor(private wishlistService: WishlistService) {}
 
@@ -21,14 +23,30 @@ export class SidepanelItemComponent {
   }
 
   public add() {
-    this.quantity += 1;
+    this.isPlusClicked = true;
+    setTimeout(() => {
+      this.isPlusClicked = false;
+    }, 100);
+    if (this.item.quantity) {
+      this.item.quantity += 1;
+      return;
+    }
+    this.item.quantity = 1;
   }
 
   public detract() {
-    if (this.quantity < 2) {
+    this.isMinusClicked = true;
+    setTimeout(() => {
+      this.isMinusClicked = false;
+    }, 100);
+    if (this.item.quantity) {
+      if (this.item.quantity < 2) {
+        return;
+      }
+      this.item.quantity -= 1;
       return;
     }
-    this.quantity -= 1;
+    this.item.quantity = 1;
   }
 
   public removeFromCart(item: ShoppingCartItem) {
@@ -36,8 +54,11 @@ export class SidepanelItemComponent {
   }
 
   public updateQuantity() {
+    this.isUpdateClicked = true;
+    setTimeout(() => {
+      this.isUpdateClicked = false;
+    }, 100);
     this.showBox = !this.showBox;
-    this.item.quantity = this.quantity;
     this.wishlistService.changeQuantity(this.item);
   }
 }

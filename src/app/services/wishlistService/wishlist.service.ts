@@ -38,10 +38,7 @@ export class WishlistService {
       (listItem) => listItem.id === item.id
     );
     if (wishListItem) {
-      console.log('TRUE!');
-      console.log('wishListItem.quantity', wishListItem.quantity);
       if (wishListItem.quantity) {
-        console.log('TRUE AGAIN!');
         wishListItem.quantity += 1;
         this.changeQuantity(wishListItem);
       }
@@ -49,10 +46,10 @@ export class WishlistService {
     }
     item.quantity = 1;
     currentList.push(item);
-    const totalPrice = this.updateTotalPrice();
     this.shoppingCart.next({
       ...this.shoppingCart.getValue(),
-      totalAmount: totalPrice,
+      totalQuantity: this.updateTotalQuantity(),
+      totalAmount: this.updateTotalPrice(),
       listOfItems: currentList,
     });
     this.setCartInLocalStorage();
@@ -68,11 +65,13 @@ export class WishlistService {
     const updatedList = currentList.filter(
       (listItem) => listItem.id !== item.id
     );
-    const totalPrice = this.updateTotalPrice();
+    this.shoppingCart.next({
+      listOfItems: updatedList,
+    });
     this.shoppingCart.next({
       ...this.shoppingCart.getValue(),
-      totalAmount: totalPrice,
-      listOfItems: updatedList,
+      totalQuantity: this.updateTotalQuantity(),
+      totalAmount: this.updateTotalPrice(),
     });
     this.setCartInLocalStorage();
   }
@@ -100,24 +99,26 @@ export class WishlistService {
       }
       return listItem;
     });
-    const totalPrice = this.updateTotalPrice();
     this.shoppingCart.next({
       ...this.shoppingCart.getValue(),
-      totalAmount: totalPrice,
+      totalQuantity: this.updateTotalQuantity(),
+      totalAmount: this.updateTotalPrice(),
       listOfItems: updatedList,
     });
     this.setCartInLocalStorage();
   }
 
-  public clearList() {
-    this.shoppingCart.next({
-      ...this.shoppingCart.getValue(),
-      totalAmount: 0,
-      totalQuantity: 0,
-      listOfItems: [],
-    });
+  public updateTotalQuantity() {
+    const currentList = this.shoppingCart.getValue().listOfItems;
+    let totalQuantity = 0;
 
-    this.setCartInLocalStorage();
+    for (const item of currentList) {
+      if (item.quantity) {
+        totalQuantity += item.quantity;
+      }
+    }
+
+    return totalQuantity;
   }
 
   private setCartInLocalStorage() {

@@ -4,10 +4,13 @@
       <h2>Je winkelmandje</h2>
       <button class="close-button" (click)="closePanel()"></button>
     </div>
-    <ng-container *ngIf="wishlistItems.length > 0; else showText">
-      <div *ngFor="let item of wishlistItems">
+    <ng-container *ngIf="shoppingCart.listOfItems.length > 0; else showText">
+      <div *ngFor="let item of shoppingCart.listOfItems">
         <app-sidepanel-item [item]="item"></app-sidepanel-item>
       </div>
+      <p class="sidepanel__total">
+        Totaal: {{ shoppingCart.totalAmount | currency }}
+      </p>
     </ng-container>
     <ng-template #showText> Je winkelmandje is leeg. </ng-template>
   </div>

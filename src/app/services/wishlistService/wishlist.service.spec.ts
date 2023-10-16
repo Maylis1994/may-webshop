@@ -14,6 +14,7 @@ describe('WishlistService', () => {
     name: 'Sample Item',
     image: 'sample.jpg',
     price: 10,
+    quantity: 2,
   };
 
   beforeEach(() => {
@@ -33,45 +34,75 @@ describe('WishlistService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add an item to the shopping cart', fakeAsync(() => {
-    service.addToWishlist(sampleItem);
-    const shoppingCart = service['shoppingCart'].getValue();
-    expect(shoppingCart.totalQuantity).toBe(1);
-    expect(shoppingCart.totalAmount).toBe(10);
-  }));
+  describe('#addToWishlist', () => {
+    it('should add an item to the shopping cart', fakeAsync(() => {
+      service.addToWishlist(sampleItem);
+      const shoppingCart = service['shoppingCart'].getValue();
+      expect(shoppingCart.totalQuantity).toBe(1);
+      expect(shoppingCart.totalAmount).toBe(10);
+    }));
 
-  it('should increment quantity when adding an existing item to the cart', fakeAsync(() => {
-    service.addToWishlist(sampleItem);
-    service.addToWishlist(sampleItem);
-    const shoppingCart = service['shoppingCart'].getValue();
-    expect(shoppingCart.totalQuantity).toBe(2);
-    expect(shoppingCart.totalAmount).toBe(20);
-  }));
+    it('should increment quantity when adding an existing item to the cart', fakeAsync(() => {
+      service.addToWishlist(sampleItem);
+      service.addToWishlist(sampleItem);
+      const shoppingCart = service['shoppingCart'].getValue();
+      expect(shoppingCart.totalQuantity).toBe(2);
+      expect(shoppingCart.totalAmount).toBe(20);
+    }));
+  });
 
-  it('should remove an item from the shopping cart', fakeAsync(() => {
-    service.addToWishlist(sampleItem);
-    service.removeFromWishlist(sampleItem);
-    const shoppingCart = service['shoppingCart'].getValue();
-    expect(shoppingCart.totalQuantity).toBe(0);
-    expect(shoppingCart.totalAmount).toBe(0);
-  }));
+  describe('#removeFromWishlist', () => {
+    it('should remove an item from the shopping cart', fakeAsync(() => {
+      service.addToWishlist(sampleItem);
+      service.removeFromWishlist(sampleItem);
+      const shoppingCart = service['shoppingCart'].getValue();
+      expect(shoppingCart.totalQuantity).toBe(0);
+      expect(shoppingCart.totalAmount).toBe(0);
+    }));
+  });
 
-  it('should update quantity of an item in the shopping cart', fakeAsync(() => {
-    const itemWithQuantity: ShoppingCartItem = {
-      ...sampleItem,
-      quantity: 3,
-    };
-    service.addToWishlist(itemWithQuantity);
-    itemWithQuantity.quantity = 1;
-    service.changeQuantity(itemWithQuantity);
-    const shoppingCart = service['shoppingCart'].getValue();
-    expect(shoppingCart.totalQuantity).toBe(1);
-    expect(shoppingCart.totalAmount).toBe(10);
-  }));
+  describe('#changeQuantity', () => {
+    it('should update quantity of an item in the shopping cart', fakeAsync(() => {
+      const itemWithQuantity: ShoppingCartItem = {
+        ...sampleItem,
+        quantity: 3,
+      };
+      service.addToWishlist(itemWithQuantity);
+      itemWithQuantity.quantity = 1;
+      service.changeQuantity(itemWithQuantity);
+      const shoppingCart = service['shoppingCart'].getValue();
+      expect(shoppingCart.totalQuantity).toBe(1);
+      expect(shoppingCart.totalAmount).toBe(10);
+    }));
+  });
 
-  it('should calculate the total price of items in the cart', fakeAsync(() => {
-    service.addToWishlist(sampleItem);
-    const totalPrice = service['updateTotalPrice']();
-    expect(totalPrice).toBe(10);
-  }));
+  describe('#updateTotalPrice', () => {
+    it('should calculate the total price of items in the cart', fakeAsync(() => {
+      service.addToWishlist(sampleItem);
+      const totalPrice = service['updateTotalPrice']();
+      expect(totalPrice).toBe(10);
+    }));
+  });
+
+  describe('#calculateItemCost', () => {
+    it('should calculate the total price of items in the cart', fakeAsync(() => {
+      service.addToWishlist(sampleItem);
+      const totalPrice = service['calculateItemCost']({
+        id: '1',
+        name: 'Sample Item',
+        image: 'sample.jpg',
+        price: 10,
+        quantity: 3,
+      });
+      expect(totalPrice).toBe(30);
+    }));
+  });
+
+  describe('#updateTotalQuantity', () => {
+    it('should calculate the total price of items in the cart', fakeAsync(() => {
+      service.addToWishlist(sampleItem);
+      const totalQuantity = service['updateTotalQuantity']();
+      expect(totalQuantity).toBe(2);
+    }));
+  });
 });

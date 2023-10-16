@@ -14,7 +14,7 @@ describe('WishlistService', () => {
     name: 'Sample Item',
     image: 'sample.jpg',
     price: 10,
-    quantity: 2,
+    quantity: 1,
   };
 
   beforeEach(() => {
@@ -85,7 +85,7 @@ describe('WishlistService', () => {
   });
 
   describe('#calculateItemCost', () => {
-    it('should calculate the total price of items in the cart', fakeAsync(() => {
+    it('should calculate the total price with the quantity of the items', fakeAsync(() => {
       service.addToWishlist(sampleItem);
       const totalPrice = service['calculateItemCost']({
         id: '1',
@@ -99,10 +99,23 @@ describe('WishlistService', () => {
   });
 
   describe('#updateTotalQuantity', () => {
-    it('should calculate the total price of items in the cart', fakeAsync(() => {
-      service.addToWishlist(sampleItem);
+    beforeEach(() => {
+      service['shoppingCart'] = new BehaviorSubject<ShoppingCart>({
+        totalQuantity: 0,
+        totalAmount: 0,
+        listOfItems: [
+          {
+            quantity: 2,
+          } as ShoppingCartItem,
+          {
+            quantity: 4,
+          } as ShoppingCartItem,
+        ],
+      });
+    });
+    it('should update the total quantity', fakeAsync(() => {
       const totalQuantity = service['updateTotalQuantity']();
-      expect(totalQuantity).toBe(2);
+      expect(totalQuantity).toBe(6);
     }));
   });
 });

@@ -55,11 +55,6 @@ export class WishlistService {
     this.setCartInLocalStorage();
   }
 
-  public existInList(item: ShoppingCartItem): boolean {
-    const currentList = this.shoppingCart.getValue().listOfItems;
-    return currentList.some((listItem) => listItem.id === item.id);
-  }
-
   public removeFromWishlist(item: ShoppingCartItem) {
     const currentList = this.shoppingCart.getValue().listOfItems;
     const updatedList = currentList.filter(
@@ -76,7 +71,7 @@ export class WishlistService {
     this.setCartInLocalStorage();
   }
 
-  public updateTotalPrice(): number {
+  private updateTotalPrice(): number {
     const currentList = this.shoppingCart.getValue().listOfItems;
     let totalPrice = 0;
 
@@ -108,7 +103,7 @@ export class WishlistService {
     this.setCartInLocalStorage();
   }
 
-  public updateTotalQuantity() {
+  private updateTotalQuantity() {
     const currentList = this.shoppingCart.getValue().listOfItems;
     let totalQuantity = 0;
 

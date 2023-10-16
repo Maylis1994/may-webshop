@@ -13,10 +13,15 @@ export class ItemComponent {
   @Input() item: ShoppingCartItem;
 
   public quantity: number = 1;
+  public isItemClicked = false;
 
   constructor(private wishlistService: WishlistService) {}
 
   public addToList() {
+    this.isItemClicked = true;
+    setTimeout(() => {
+      this.isItemClicked = false;
+    }, 100);
     this.wishlistService.addToWishlist(this.item);
   }
 }

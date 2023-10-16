@@ -36,5 +36,10 @@
     outline: inherit;
     display: flex;
     align-items: center;
+
+    &--click {
+      background-color: black;
+      color: white;
+    }
   }
 }

@@ -5,15 +5,16 @@
   display: flex;
   justify-content: space-between;
   padding: 1rem 20rem 1rem 20rem;
-  @include for-phone-only {
+  @include media-screen-m-down {
     margin: 1rem;
+    padding: 1rem;
+    display: block;
   }
 
   &__image {
     max-width: 20rem;
-    @include for-phone-only {
-      max-width: 10rem;
-      margin: 1rem;
+    @include media-screen-m-down {
+      max-width: 15rem;
     }
   }
 

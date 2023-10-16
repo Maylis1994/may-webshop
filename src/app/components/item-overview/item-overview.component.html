@@ -1,8 +1,8 @@
-<div *ngIf="houseList" class="item-overview">
+<div *ngIf="itemList" class="item-overview">
   <div class="item-overview__layout">
     <div class="item-overview__items">
-      <ng-container *ngFor="let house of houseList">
-        <app-item [houseItem]="house"></app-item>
+      <ng-container *ngFor="let item of itemList">
+        <app-item [item]="item"></app-item>
       </ng-container>
     </div>
   </div>

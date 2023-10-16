@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Villa Teun",
+    "image": "../../../assets/images/huis-1.jpg",
+    "price": 4000
+  },
+  {
+    "id": "2",
+    "name": "Bonte Schaap",
+    "image": "../../../assets/images/huis-2.jpg",
+    "price": 4000
+  },
+  {
+    "id": "3",
+    "name": "Texelaar",
+    "image": "../../../assets/images/huis-3.jpg",
+    "price": 3000
+  },
+  {
+    "id": "4",
+    "name": "Zwartbles",
+    "image": "../../../assets/images/huis-4.jpg",
+    "price": 2500
+  }
+]

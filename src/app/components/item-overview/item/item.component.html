@@ -1,0 +1,20 @@
+<div class="item">
+  <div class="item__image-box">
+    <img class="item__image" [src]="item.image" />
+  </div>
+  <div class="item__content-box">
+    <h2>
+      {{ item.name }}
+    </h2>
+    <p>Prijs: {{ item.price | currency : "EUR" : true }}</p>
+    <button
+      type="button"
+      class="item__button"
+      (click)="addToList()"
+      [ngClass]="isItemClicked ? 'item__button--click' : ''"
+    >
+      Voeg toe
+      <img class="item__icon" src="../../../assets/icons/shoppingCartAdd.svg" />
+    </button>
+  </div>
+</div>

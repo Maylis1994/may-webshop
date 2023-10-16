@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
-import houselist from '../../../assets/house-data.json';
-
-export interface House {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  description: string;
-  amountOfBedrooms: number;
-}
+import { ShoppingCartItem } from 'src/app/services/wishlistService/wishlist.service';
+import itemList from '../../../assets/items-list-data.json';
 
 @Component({
   selector: 'app-item-overview',
@@ -16,5 +8,5 @@ export interface House {
   styleUrls: ['./item-overview.component.scss'],
 })
 export class ItemOverviewComponent {
-  public houseList: House[] = houselist;
+  public itemList: ShoppingCartItem[] = itemList;
 }
